@@ -97,40 +97,60 @@
   - `db.createCollection('comments')`
 
   ```
-  db.posts.find({title:  " Borrows something"}, {_id:1}) 
-    
+  db.posts.find({title:  " Borrows something"}, {_id:1})
+
   db.comments.insert({
   username : 'GoodGuyGreg',
   comment : 'Hope you got a good deal!',
-  post : ['618cf3589ffed6edab62664b']  
+  post : ['618cf3589ffed6edab62664b']
   })
 
-  db.posts.find({title:  " Borrows everything"}, {_id:1}) 
-  
+  db.posts.find({title:  " Borrows everything"}, {_id:1})
+
   db.comments.insert({ username : 'GoodGuyGreg', comment : 'What\'s mine is yours!', post : ['618cf3589ffed6edab62664c']  })
 
 
-  db.posts.find({title: /Forks your repo on github/}, {_id:1}) 
-    
+  db.posts.find({title: /Forks your repo on github/}, {_id:1})
+
   db.comments.insert({
     username : 'GoodGuyGreg',
     comment : 'Don\'t violate the licensing agreement!',
     post : ['618cf3599ffed6edab62664d']
   })
 
-  db.posts.find({title: /Passes out at party/}, {_id:1}) 
-    
+  db.posts.find({title: /Passes out at party/}, {_id:1})
+
   db.comments.insert({
     username : 'ScumbagSteve',
     comment : 'It still isn\'t clean',
     post : ['618cf3569ffed6edab626648']
   })
 
-  db.posts.find({title: /Reports a bug in your code/}, {_id:1}) 
-    
+  db.posts.find({title: /Reports a bug in your code/}, {_id:1})
+
   db.comments.insert({
     username :' ScumbagSteve',
     comment :' Denied your PR cause I found a hack',
     post : ['618cf3579ffed6edab62664a']
   })
-```
+  ```
+
+- **Quering related collections**
+
+  - Find all users
+    - `db.users.find({})` 
+  - Find all posts
+    - `db.posts.find({})` 
+  - Find all posts that was authored by "GoodGuyGreg"
+    - `db.posts.find({username: /GoodGuyGreg/})` 
+  - Find all posts that was authored by "ScumbagSteve"
+    - `db.posts.find({username: /ScumbagSteve/})` 
+  - Find all comments
+    - `db.comments.find({})` 
+  - Find all comments that was authored by "GoodGuyGreg"
+    - `db.comments.find({username: /GoodGuyGreg/})` 
+  - Find all comments that was authored by "ScumbagSteve"
+    - `db.comments.find({username: /ScumbagSteve/})` 
+  - Find all comments belonging to the post "Reports a bug in your code"
+    - `db.posts.find({title: /Reports a bug in your code/}, {_id:1})`
+    - `db.comments.find({post: {$in: ['618cf3579ffed6edab62664a'] }})` 
