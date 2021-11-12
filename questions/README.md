@@ -1,3 +1,17 @@
+## To start 
+```
+	git clone https://github.com/noamgolani/mongodb-weekend.git
+	cd mongodb-weekend/questions
+	npm i
+	npm run start
+```
+
+### To develop / test 
+```
+	npm run dev
+	npm run test <- on another terminal
+```
+
 ## Entries
 
 - **GET /questions**
