@@ -12,15 +12,26 @@ import {
 import {
 	validateQuestion,
 	validateQuestionNonStrict,
+	validateId,
 } from "../middlewares/validator.js";
 
 const questionsRoute = express.Router();
 
 questionsRoute.get("/", getAllQuestions);
+
 questionsRoute.post("/", validateQuestion, createQuestion);
-questionsRoute.put("/:id", validateQuestionNonStrict, updateQuestion);
-questionsRoute.delete("/:id", deleteQuestion);
-questionsRoute.get("/:id", getQuestionById);
-questionsRoute.get("/difficulty:difficulty", getQuestionsByDifficulty);
+
+questionsRoute.put(
+	"/:id",
+	validateId,
+	validateQuestionNonStrict,
+	updateQuestion
+);
+
+questionsRoute.delete("/:id", validateId, deleteQuestion);
+
+questionsRoute.get("/:id", validateId, getQuestionById);
+
+questionsRoute.get("/difficulty/:difficulty", getQuestionsByDifficulty);
 
 export default questionsRoute;

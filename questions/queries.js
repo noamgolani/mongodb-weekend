@@ -9,3 +9,6 @@ db.questions.insert({ title :  'What is recursion in a programming language', co
 db.questions.insert({ title :  'What is DOM', correctAnswer : 'Document Object Model is a programming interface for HTML and XML documents', answers : [ 'Done On Morning A technique to a healthy work life' , 'Document Object Maintain is a design pattern to save your front the correct way', 'Document Object Model is a programming interface for HTML and XML documents' ], difficulty: 7 })
 
 db.questions.insert({ title :  'What is Object Destructuring', correctAnswer : 'A new way to extract elements from an object or an array.', answers : [ 'A new way to extract elements from an object or an array', 'A Memory Management feature that helps the garbage collector in js', 'Document Object Model is a programming interface for HTML and XML documents' ] ,difficulty: 8 })
+
+//Clean up 
+db.questions.remove({title: /^Test/})

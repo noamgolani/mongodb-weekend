@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+const { ObjectId } = mongoose.Types;
 //TODO seperate validation functions
 //title() will return validated and throw an http type error
 export function validateQuestion(req, res, next) {
@@ -62,6 +64,16 @@ export function validateQuestionNonStrict(req, res, next) {
 			}
 		}
 		req.validated = validated;
+		next();
+	} catch (err) {
+		next(err);
+	}
+}
+
+export function validateId(req, res, next) {
+	const { id } = req.params;
+	try {
+		if (!ObjectId.isValid(id)) throw { status: 400, message: "Bad id" };
 		next();
 	} catch (err) {
 		next(err);

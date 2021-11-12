@@ -31,6 +31,37 @@ export async function updateQuestion(req, res, next) {
 		next(err);
 	}
 }
-export async function deleteQuestion(req, res, next) {}
-export async function getQuestionById(req, res, next) {}
-export async function getQuestionsByDifficulty(req, res, next) {}
+
+export async function deleteQuestion(req, res, next) {
+	const { id } = req.params;
+	try {
+		const { deletedCount } = await Question.deleteOne({ _id: id });
+		res.send({ deleted: !!deletedCount });
+	} catch (err) {
+		next(err);
+	}
+}
+
+export async function getQuestionById(req, res, next) {
+	const { id } = req.params;
+	try {
+		const question = await Question.find({ _id: id });
+		if (question.length === 0)
+			throw { status: 404, message: "No Such Question" };
+		else res.send(question[0]);
+	} catch (err) {
+		next(err);
+	}
+}
+
+export async function getQuestionsByDifficulty(req, res, next) {
+	const { difficulty } = req.params;
+	try {
+		const allQuestions = await Question.find({
+			difficulty: { $gte: difficulty },
+		});
+		res.send(allQuestions);
+	} catch (err) {
+		next(err);
+	}
+}
