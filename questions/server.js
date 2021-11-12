@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 import questionsRoute from "./routes/questionsRoute.js";
+import errorHandler from "./middlewares/errorHandler.js";
 
 dotenv.config();
 const { NODE_ENV, MONGO_URI } = process.env;
@@ -26,6 +27,8 @@ if (NODE_ENV === "dev") app.use(morgan("tiny"));
 //Routes
 
 app.use("/questions", questionsRoute);
+
+app.use(errorHandler);
 
 const port = process.env.PORT || 3000;
 
