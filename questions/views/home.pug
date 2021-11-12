@@ -6,7 +6,6 @@ block content
   else
     h1 #{question.title}
     h3 difficulty #{question.difficulty}
-    ul
+    ul(class="list-group")
       each answer, index in question.answers
-        li
-          button(id=`answer${index}` class="btn btn-outline-primary") #{answer}
+        li(id=`answer${index}` class="btn btn-outline-primary list-group-item") #{answer}
