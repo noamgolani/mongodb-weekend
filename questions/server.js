@@ -3,6 +3,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
+import homeRoute from "./routes/homeRoute.js";
 import questionsRoute from "./routes/questionsRoute.js";
 import errorHandler from "./middlewares/errorHandler.js";
 
@@ -20,6 +21,8 @@ mongoose
 
 const app = express();
 
+app.set('view engine','pug');
+
 app.use(express.json());
 
 if (NODE_ENV === "dev") app.use(morgan("tiny"));
@@ -27,6 +30,7 @@ if (NODE_ENV === "dev") app.use(morgan("tiny"));
 //Routes
 
 app.use("/questions", questionsRoute);
+app.use("/", homeRoute);
 
 app.use(errorHandler);
 
